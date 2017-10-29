@@ -5,14 +5,14 @@ date: "8 de março de 2016"
 output: pdf_document
 ---
 
-A segmentação de imagens visa agrupar pixels com características similares, como por exemplo, nível de cinza, textura e contraste, resultando em áreas com unidades homogêneas. Logo, a segmentação baseia-se em análise estatística espacial por crescimento de regiões, onde tem-se como parâmetros a quantidade mínima de pixel (para criar a região) e um limiar de similaridade (*threshold* usado apra definir quão similar determinado pixel é em relação aos pixels vizinhos). Assim, pode-se dizer que a segmentação diferencia áreas homogêneas com padrões diferentes aos seus vizinhos, criando *k* regiões diferentes na imagem. porém tal abordagem não classifica as regioes criadas quanto ao pertencimento a um mesmo grupo ou não. Para mais informações sobre segmentação, [ver manual *spring*](http://www.mundogeomatica.com.br/Livros/Livro_Spring_5.1.2_Aplicacoes_Praticas/LivroSPRING512PassoaPassoAplicacaoPratica.pdf), íten 7.7, página 127.
+A segmentação de imagens visa agrupar pixels com características similares, como por exemplo, nível de cinza, textura e contraste, resultando em áreas com unidades homogêneas. Logo, a segmentação baseia-se em análise estatística espacial por crescimento de regiões, onde tem-se como parâmetros a quantidade mínima de pixel (para criar a região) e um limiar de similaridade (*threshold* usado apra definir quão similar determinado pixel é em relação aos pixels vizinhos). Assim, pode-se dizer que a segmentação diferencia áreas homogêneas com padrões diferentes aos seus vizinhos, criando *n* regiões diferentes na imagem. porém tal abordagem não classifica as regioes criadas quanto ao pertencimento a um mesmo grupo ou não. Para mais informações sobre segmentação, [ver manual *spring*](http://www.mundogeomatica.com.br/Livros/Livro_Spring_5.1.2_Aplicacoes_Praticas/LivroSPRING512PassoaPassoAplicacaoPratica.pdf), íten 7.7, página 127.
 
 Está implementado nesta funçao, segmentação baseada em clusters com dois algoritmos:  
   
 1. K-meansclustering;  
 1. Fuzzy C-Means Clustering;  
   
-A abordagem aqui apresentada, **não está baseada no método de crescimento por região**. Mas cria $n$ grupos com áreas homogêneas, a partir dos valores dos pixels da(s) imagem(ns). Portanto, não consideram elementos como, contraste e textura. Em resumo, esta abordagem classifica da imagem em $n$ grupos (definidos pelo usário), que serão classificados estatísticamente através da análise de cluster (K-means) e posteriormente *extrapolado* (usado para classificação) para toda a imagem em questão.
+A abordagem aqui apresentada, **não está baseada no método de crescimento por região**. Mas cria $n$ grupos com áreas homogêneas, a partir dos valores dos pixels da(s) imagem(ns). Portanto, não consideram elementos como, contraste e textura. Em resumo, esta abordagem produz uma classificação não supervisionada da imagem em $n$ grupos (onde $n$ pode ser definido pelo usuário, ou por análise exploratória **VER ITEM H.life**). A classificação das áreas homogeneas são feitos estatisticamente através da análise de clusters (K-means, ou Fuzzy C-means). Ae posteriormente *extrapolado* (usado para classificação) para toda a imagem em questão.
 
 ```{r load_fct}
 source('segmentation.R')
